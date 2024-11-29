@@ -1,5 +1,8 @@
 use axum::{extract::State, routing::get, Router};
 use dotenv::dotenv;
+use std::future::IntoFuture;
+
+mod schedulers;
 
 #[derive(Clone)]
 pub struct ServerConfig {
@@ -36,7 +39,11 @@ async fn main() {
     let addr = format!("{}:{}", &server_config.host, &server_config.port);
 
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+
+    let (_res1, _res2) = futures::join!(
+        schedulers::start(),
+        axum::serve(listener, app).into_future(),
+    );
 }
 
 
