@@ -12,3 +12,14 @@ dotenv = "0.15.0"
 serde = { version = "1.0.215", features = ["derive"] }
 futures = "0.3.31"
 chrono = "0.4.38"
+tracing = "0.1.41"
+uuid = { version = "1.11.0", features = ["v4", "serde"] }
+sqlx = { version = "0.8.2", features = [
+    "runtime-tokio",
+    "macros",
+    "postgres",
+    "chrono",
+    "json",
+    "uuid",
+] }
+reqwest = { version = "0.12.9", features = ["json", "default-tls", "native-tls", "rustls-tls"] }
