@@ -1,7 +1,9 @@
 use axum::{extract::State, routing::get, Router};
 use dotenv::dotenv;
 use std::future::IntoFuture;
+use axum::response::Html;
 use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
+use monitoring::render_graph;
 
 mod schedulers;
 
@@ -64,8 +66,8 @@ async fn main() {
 async fn about(State(server_config): State<ServerConfig>) -> String {
     format!("Package: {}\nVersion: {}\nTEST LOAD ENV: {}", &server_config.pkg_name, &server_config.pkg_version, &server_config.test_env_load)
 }
-async fn root() -> String {
-    "Root, World!".to_string()
+async fn root(State(server_config): State<ServerConfig>) -> Html<String> {
+    Html(render_graph(server_config.pg_pool).await)
 }
 async fn get_foo() -> String {
     "Get, World!".to_string()

@@ -1,0 +1,38 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT * FROM availability",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "ip_or_domain",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "status_code",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 3,
+        "name": "timestamp",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "9a7aefbc0d09283b70d07aece079956adf4dbba031a75d9d6197040f6bebd7e0"
+}
